@@ -14,18 +14,19 @@
         ></ImageButton>
     <TextView
         android:textColor="@color/white"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="请为每位玩家输入昵称"
+        android:text=""
         android:textSize="30sp"
         android:gravity="center"
         ></TextView>
 <EditText
     android:textColor="@color/white"
     android:id="@+id/text1"
-    android:layout_marginTop="15dp"
-    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:hint="    玩家1（不超过两位字符）"
     android:textSize="22sp"
@@ -34,7 +35,8 @@
     <EditText
         android:textColor="@color/white"
         android:id="@+id/text2"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="    玩家2（不超过两位字符）"
         android:textSize="22sp"
@@ -43,7 +45,8 @@
     <EditText
         android:textColor="@color/white"
         android:id="@+id/text3"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:hint="    玩家3（不超过两位字符）"
         android:textSize="22sp"
@@ -52,7 +55,8 @@
     <EditText
         android:textColor="@color/white"
         android:id="@+id/text4"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="    玩家4（不超过两位字符）"
         android:textSize="22sp"
@@ -61,7 +65,8 @@
     <EditText
         android:textColor="@color/white"
         android:id="@+id/text5"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:hint="    玩家5（不超过两位字符）"
         android:textSize="22sp"
@@ -69,11 +74,12 @@
         ></EditText>
     <EditText
         android:id="@+id/text6"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="    玩家6（不超过两位字符）"
         android:textSize="22sp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="20dp"
         ></EditText>
     <Button
         android:id="@+id/btn_confirm"

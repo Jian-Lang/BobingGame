@@ -18,13 +18,13 @@
         android:layout_marginTop="120dp"
         android:gravity="center"
         android:textSize="30dp"
-        android:text="选择本局博饼的人数"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </TextView>
 <LinearLayout
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="80dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
