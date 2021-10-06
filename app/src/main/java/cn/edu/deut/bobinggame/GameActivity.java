@@ -23,7 +23,6 @@ public class GameActivity extends AppCompatActivity {
     private Handler handler;
     private TextView textView;
     private volatile boolean flag_mus = true;
-    private volatile boolean flag_res = false;
     Intent musicService,tossService;
     private ImageButton imageButton;
     //子线程
@@ -38,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
     public volatile int current_player = 1;
     public volatile int current_score = -1;
     public volatile boolean isRecoverd = true;
+    public static int circles = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +46,8 @@ public class GameActivity extends AppCompatActivity {
         musicService = new Intent(getApplicationContext(),MusicService.class);
         tossService = new Intent(getApplicationContext(),TossBGMService.class);
         flag_mus = bundle.getBoolean("music");
-        flag_res = bundle.getBoolean("res");
-        Toast.makeText(this,""+flag_res,Toast.LENGTH_SHORT).show();
-        if(flag_res)
-        startService(musicService);
+        //Toast.makeText(this,""+flag_res,Toast.LENGTH_SHORT).show();
+        if(circles > 0) startService(musicService);
         imageButton = findViewById(R.id.btn_music);
         if(!flag_mus){
             imageButton.setImageResource(R.drawable.ic_baseline_music_off_24);
@@ -198,6 +196,7 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }else {
                     if(button2.getText().equals("查看结果")){
+                        circles++;
                         stopService(tossService);
                         Intent intent = new Intent(GameActivity.this,ResultActivity.class);
                         Bundle messenger = new Bundle();

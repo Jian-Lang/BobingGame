@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener{
     TextView textView_player[];
     private volatile boolean flag = true;
-    Intent musicService;
+    Intent musicService,musicService2;
     private ImageButton imageButton;
     Button button1,button2;
     @Override
@@ -20,6 +20,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         musicService = new Intent(getApplicationContext(),ResultMusicService.class);
+        musicService2 = new Intent(getApplicationContext(),MusicService.class);
         startService(musicService);
         imageButton = findViewById(R.id.btn_music);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -61,14 +62,12 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.next_turn:
                 stopService(musicService);
                 //startService(musicService2);
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("res",true);
                 Intent intent = new Intent(ResultActivity.this,GameActivity.class);
-                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             case R.id.restart_game:
                 stopService(musicService);
+
                 Intent intent1 = new Intent(ResultActivity.this,MainActivity.class);
                 startActivity(intent1);
                 break;
