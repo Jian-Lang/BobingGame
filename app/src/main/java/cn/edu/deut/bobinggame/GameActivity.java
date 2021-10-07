@@ -34,10 +34,10 @@ public class GameActivity extends AppCompatActivity {
     //volatile修饰符用来保证其它线程读取的总是该变量的最新的值
     public volatile boolean isStop = false;
     public volatile boolean flag = true;
+    public volatile boolean hasStarted = false;
     public volatile int current_player = 1;
     public volatile int current_score = -1;
     public volatile boolean isRecoverd = true;
-    public static int circles = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,6 @@ public class GameActivity extends AppCompatActivity {
         tossService = new Intent(getApplicationContext(),TossBGMService.class);
         flag_mus = bundle.getBoolean("music");
         //Toast.makeText(this,""+flag_res,Toast.LENGTH_SHORT).show();
-        if(circles > 0) startService(musicService);
         imageButton = findViewById(R.id.btn_music);
         if(!flag_mus){
             imageButton.setImageResource(R.drawable.ic_baseline_music_off_24);
@@ -100,6 +99,7 @@ public class GameActivity extends AppCompatActivity {
                     if(flag){
                         startService(tossService);
                         flag = false;
+                        hasStarted = true;
                         current_score ++;
                         if (thread != null&&isStop == true){
                             isStop = false;
@@ -196,7 +196,6 @@ public class GameActivity extends AppCompatActivity {
                     }
                 }else {
                     if(button2.getText().equals("查看结果")){
-                        circles++;
                         stopService(tossService);
                         Intent intent = new Intent(GameActivity.this,ResultActivity.class);
                         Bundle messenger = new Bundle();
@@ -223,15 +222,19 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isRecoverd = true;
                 if(current_player <= num){
-                    if(isStop == true) {
+                    if(isStop == true && hasStarted) {
+                        hasStarted = false;
                         for (int i = 0; i < 6; i++) {
                             imageViews[i].setImageResource(R.drawable.t1);
                         }
                         if(current_player < num)
                         textView.setText(name[current_player]+"的回合");
                         current_player++;
-                    }else {
+                    }else if(isStop != true && hasStarted){
                         Toast.makeText(GameActivity.this, "请先停止游戏，再重新开始！", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(!hasStarted){
+                        Toast.makeText(GameActivity.this, "本轮还未点击开始，请点击开始游戏！", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
