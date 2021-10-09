@@ -42,9 +42,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        Bundle bundle = this.getIntent().getExtras();
-        musicService = new Intent(getApplicationContext(),MusicService.class);
-        tossService = new Intent(getApplicationContext(),TossBGMService.class);
         flag_mus = bundle.getBoolean("music");
         //Toast.makeText(this,""+flag_res,Toast.LENGTH_SHORT).show();
         imageButton = findViewById(R.id.btn_music);
@@ -81,9 +78,6 @@ public class GameActivity extends AppCompatActivity {
         imageViews = new ImageView[]{imageView1,imageView2,imageView3,imageView4,imageView5,imageView6};
 
         int num = bundle.getInt("num_people");
-        int score[][] = new int[num][6];
-        String name[] = new String[num];
-        String keys[] = {"p1","p2","p3","p4","p5","p6"};
         for(int i = 0;i<num;i++){
             name[i] = bundle.getString(keys[i]);
         }
@@ -179,12 +173,6 @@ public class GameActivity extends AppCompatActivity {
                 if(isStop == false) {
                     stopService(tossService);
                     isStop = true;
-                    try {
-                        //当子线程执行完以后才继续执行主线程
-                        thread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     //显示掷出的点数
                     if(current_player < num){
                         Toast.makeText(GameActivity.this, name[current_player-1]+": " + count+" "+number[0]+" "+number[1]+" "+number[2]+" "+number[3]+" "+number[4]+" "+number[5], Toast.LENGTH_SHORT).show();
@@ -222,11 +210,6 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isRecoverd = true;
                 if(current_player <= num){
-                    if(isStop == true && hasStarted) {
-                        hasStarted = false;
-                        for (int i = 0; i < 6; i++) {
-                            imageViews[i].setImageResource(R.drawable.t1);
-                        }
                         if(current_player < num)
                         textView.setText(name[current_player]+"的回合");
                         current_player++;
